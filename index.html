@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduFlex: Adaptive Online Learning Platform</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff7d6 25%, #ffd95c 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        nav {
+            background-color: #ffcc00;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav .logo-container {
+            height: 80px; /* Increased height */
+            display: flex;
+            align-items: center;
+        }
+
+        nav .logo {
+            height: 150px; /* Adjust this value to your preferred size */
+            max-width: 200px; /* Adjust this value to your preferred size */
+        }
+
+
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #3272b6;
+        }
+
+        .section {
+            padding: 40px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.7);
+            margin: 30px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            max-width: 1000px;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 70%);
+            animation: pulse 10s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+
+        h1, h2 {
+            color: #043363;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            font-size: 2em;
+            border-bottom: 2px solid #ffcc00;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .paragraph-card {
+            background-color: rgba(255, 255, 255, 0.5);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 700px;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .paragraph-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .paragraph-card p {
+            margin-bottom:15px;
+            text-align: justify;
+        }
+
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .milestone {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .milestone:hover {
+            transform: translateY(-5px);
+        }
+
+        .milestone h3 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #043363;
+        }
+
+        .progress-bar {
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-bar-inner {
+            height: 10px;
+            border-radius: 10px;
+            background-color: #3272b6;
+            width: 0;
+            transition: width 1s ease;
+        }
+
+        .technology {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .technology div {
+            text-align: center;
+            margin: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .technology div:hover {
+            transform: scale(1.1);
+        }
+
+        .technology img {
+            width: 100px;
+            height: auto;
+        }
+
+        .document-card {
+            border: 1px solid #043363;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            width: 250px;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.7);
+            position: relative;
+            z-index: 1;
+            transform-origin: center center;
+        }
+
+        .document-card:hover {
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            background-color: rgba(255, 255, 255, 0.9);
+        }
+
+        .document-card a {
+            display: block;
+            margin-top: 15px;
+            text-decoration: none;
+            background-color: #ffcc00;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .document-card a:hover {
+            background-color: #3272b6;
+        }
+
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .bg-animation div {
+            position: absolute;
+            animation: move 15s linear infinite;
+        }
+
+        .bg-animation .circle {
+            background: rgba(255, 204, 0, 0.2);
+            border-radius: 50%;
+        }
+
+        .bg-animation .triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 86px solid rgba(255, 204, 0, 0.2);
+            background: none;
+        }
+
+        .bg-animation .square {
+            background: rgba(255, 204, 0, 0.2);
+        }
+
+        .bg-animation div:nth-child(1) {
+            width: 120px;
+            height: 120px;
+            left: 10%;
+            animation-duration: 8s;
+            animation-delay: 0s;
+        }
+
+        .bg-animation div:nth-child(2) {
+            width: 80px;
+            height: 80px;
+            left: 30%;
+            animation-duration: 10s;
+            animation-delay: 2s;
+        }
+
+        .bg-animation div:nth-child(3) {
+            left: 50%;
+            animation-duration: 12s;
+            animation-delay: 4s;
+        }
+
+        .bg-animation div:nth-child(4) {
+            width: 70px;
+            height: 70px;
+            left: 70%;
+            animation-duration: 14s;
+            animation-delay: 6s;
+        }
+
+        .bg-animation div:nth-child(5) {
+            width: 100px;
+            height: 100px;
+            left: 90%;
+            animation-duration: 16s;
+            animation-delay: 8s;
+        }
+
+        .bg-animation div:nth-child(6) {
+            width: 90px;
+            height: 90px;
+            left: 20%;
+            animation-duration: 18s;
+            animation-delay: 1s;
+        }
+
+        .bg-animation div:nth-child(7) {
+            left: 60%;
+            animation-duration: 20s;
+            animation-delay: 3s;
+        }
+
+        .bg-animation div:nth-child(8) {
+            width: 110px;
+            height: 110px;
+            left: 80%;
+            animation-duration: 22s;
+            animation-delay: 5s;
+        }
+
+        @keyframes move {
+            0% { 
+                top: -10%; 
+                transform: translateY(0) rotate(0deg); 
+            }
+            100% { 
+                top: 110%; 
+                transform: translateY(-100%) rotate(720deg); 
+            }
+        }
+
+        .about-section {
+            background-color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .whatIs-title1 {
+            text-align: center;
+            font-size: 2rem;
+        }
+
+        .autoAlignAbout {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 1400px;
+            /* You may adjust the max-width value as needed */
+            padding-left: 1rem;
+            /* Assuming 1rem is the base unit for padding in your design */
+            padding-right: 1rem;
+            /* /* Adjust padding as needed */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            /* Adjust the gap as needed */
+            align-items: center;
+            /* Centers items horizontally */
+            justify-content: center;
+            line-height: 1.5;
+            scale: 0.9;
+        }
+
+        .about-card {
+            border-color: rgb(233, 233, 233);
+            border-style: solid;
+            border-radius: 15px;
+        }
+
+        .about-card-top {
+            background-color: #e9e9e931;
+            height: 250px;
+            width: 250px;
+            padding: 20px;
+        }
+
+        .about-card-bot {
+            background-color: #ffffff;
+            width: 250px;
+            text-align: start;
+            font-size: 1.1em;
+            padding: 20px;
+            border-bottom-right-radius: 15px;
+            border-bottom-left-radius: 15px;
+        }
+
+        .team-stat {
+            background-color: #fcda61;
+            padding: 5px;
+            width: 50%;
+            border-radius: 5px;
+            text-align: center;
+            font-size: medium;
+        }
+
+        .team-content {
+            padding: 10px;
+            padding-top: 30px;
+        }
+
+        .about-team-picture {
+            height: 250px;
+            width: 250px;
+            border-radius: 15px;
+        }
+
+        footer {
+            background-color: #043363;
+            color: white;
+            padding: 40px 0;
+            margin-top: 50px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section {
+            margin-bottom: 20px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 5px;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="circle"></div>
+        <div class="square"></div>
+        <div class="triangle"></div>
+        <div class="circle"></div>
+        <div class="square"></div>
+        <div class="circle"></div>
+        <div class="triangle"></div>
+        <div class="square"></div>
+    </div>
+
+    <nav>
+        <div class="logo-container">
+            <a href="#logo">
+                <img src=".\assert\img\EduFlex.png" alt="EduFlex Logo" class="logo">
+            </a>
+        </div>
+        <div>
+            <a href="Team.html">Team</a>
+            <a href="#contact">Contact Us</a>
+        </div>
+    </nav>
+
+    <div class="section" id="logo">
+        <h1>EduFlex: Adaptive Online Learning Platform</h1>
+        <div class="paragraph-card">
+            <p>Welcome to EduFlex, where adaptive learning meets primary education.</p>
+        </div>
+    </div>
+
+    <div class="section" id="topic">
+        <h2>Topic with Small Introduction</h2>
+        <div class="paragraph-card">
+            <p>The literature review explores the landscape of adaptive online learning systems for primary school students, highlighting limited evaluations and accessibility challenges in existing systems. The study aims to develop a tailored system addressing the unique needs of young learners in four key areas: facial recognition and authentication, emotion detection, personalized advice generation, and adaptive recommendation systems.</p>
+        </div>
+    </div>
+
+    <div class="section" id="literature-survey">
+        <h2>Literature Survey</h2>
+        <div class="paragraph-card">
+        <p>The literature review explores the landscape of adaptive online learning systems for primary school students, highlighting limited evaluations and accessibility challenges in existing systems [1]. The study aims to develop a tailored system addressing the unique needs of young learners in four key areas. Firstly, it delves into advancements in facial recognition and authentication, focusing on deep convolutional neural networks (CNNs) [2], attention mechanisms [3], and Vision Transformers [6] for robust and accurate facial analysis. Secondly, it discusses various approaches to emotion detection [4], emphasizing the need for methodologies tailored for primary school students to overcome challenges like informal text [5] and multiple emotions within sentences [6]. Thirdly, the study explores reinforcement learning (RL) algorithms and Large Language Models (LLMs) for personalized advice generation and socio-emotional learning outcomes enhancement [7]. Lastly, it addresses the lack of adaptive recommendation systems for primary students, proposing a system leveraging AI techniques [8], [9] and knowledge graphs for comprehensive educational growth. These components collectively aim to improve the effectiveness, inclusivity, and usability of adaptive online learning platforms for primary education.
+        </p></div>
+        <h2>Refrences</h2> 
+        <div class="paragraph-card">
+            <p>[1] B. Pardamean, T. Suparyanto, T. W. Cenggoro, D. Sudigyo, and A. Anugrahana, “AI-Based Learning Style Prediction in Online Learning for Primary Education,” IEEE Access, vol. 10, pp. 35725–35735, 2022, doi: 10.1109/access.2022.3160177.</p>
+            <p>[2] Y. Taigman, M. Yang, M. Ranzato and L. Wolf, “DeepFace: Closing the gap to human-level performance in face verification,” in Proceedings of IEEE Conference on Computer Vision and Pattern Recognition, 2014, pp. 1701-1708.</p>
+            <p>[3] F. Wang, M. Jiang, C. Qian, S. Yang, C. Li, H. Zhang, X. Wang and X. Tang, “Residual attention network for image classification,” in Proceedings of IEEE Conference on Computer Vision and Pattern Recognition, 2017, pp. 6450-6458.</p>
+            <p>[4] S. Kusal, S. Patil, K. Kotecha, R. Aluvalu, and V. Vijayakumar, “AI Based Emotion Detection for Textual Big Data: Techniques and Contribution,” Big data and cognitive computing, Sep. 09, 2021. https://www.mdpi.com/2504-2289/5/3/43</p>
+            <p>[5] E. Batbaatar, M. Li, and K. H. Ryu, “Semantic-Emotion Neural Network for Emotion Recognition From Text,” IEEE Access, vol. 7, pp. 111866–111878, 2019, doi: 10.1109/access.2019.2934529.</p>
+            <p>[6] A. Balahur and M. Turchi, “Comparative experiments using supervised learning and machine translation for multilingual sentiment analysis,” Computer Speech & Language, vol. 28, no. 1, pp. 56–75, Jan. 2014, doi: 10.1016/j.csl.201.03.004.</p>
+            <p>[7] W. Chen, J. Tian, C. Fan, Y. Li, H. He, and Y. Jin, “Preference-Controlled Multi-Objective Reinforcement Learning for Conditional Text Generation,” Proceedings of the AAAI Conference on Artificial Intelligence, vol. 37, no. 11, pp. 12662–12672, Jun. 2023, doi: 10.1609/aaai.v37i11.26490.</p>
+            <p>[8] P Ramya and S G Balakrishnan and M Kannan, Recommendation system to improve students performance using machine learning, Tamil Nadu, India: Department of Computer Science and Engineering, Mahendra Engineering College, 2020.</p>
+            <p>[9] Qian Zhang, Jie Lu, Guangquan Zhang, Recommender Systems in E-learning, Sydney: University of Technology, 2020.</p>
+      </div>
+    </div>
+
+    <div class="section" id="research-gap">
+        <h2>Research Gap</h2>
+        <div class="paragraph-card">
+            <div style="margin-bottom: 15px;">
+                <h3>Research Gap in Authentication:</h3>
+                <p>Current adaptive online learning platforms for primary education lack age-appropriate and secure authentication methods, particularly in utilizing facial recognition technology. Traditional username-password systems are cumbersome for young learners, leading to frustration and wasted time. Simplified alternatives like picture-based passwords still demand cognitive efforts beyond their developmental stage. Accurate student identification is crucial for progress tracking and adjusting difficulty levels, but current solutions rely on cumbersome inputs or simple profiles prone to mix-ups, especially in remote learning.</p>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <h3>Research Gap in Emotion Detection and Personalized Advice Generation:</h3>
+                <p>Emotion detection and personalized advice generation for primary students remain underexplored in adaptive learning platforms. Existing techniques overlook children's limited language proficiency and subtle emotional expressions. Challenges include mapping emotional states to appropriate interventions and addressing ethical considerations, privacy concerns, and long-term impact on emotional well-being and academic performance.</p>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <h3>Research Gap in Personalized Learning Recommendations:</h3>
+                <p>Adaptive platforms neglect primary education in personalized learning recommendations. Existing research focuses on post-hoc test score analysis, lacking transparent, justifiable recommendations in real-time. A knowledge-based recommendation system tailored for primary education is needed to foster trust and enhance personalized learning.</p>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <h3>Research Gap in Attention Monitoring:</h3>
+                <p>Attention monitoring during online quizzes for elementary students is insufficiently studied in adaptive learning platforms. Current systems struggle with varied conditions and fail to consider the interplay of physical, emotional, and contextual factors affecting attention. Real-time interventions are hindered, and studies mainly target adult learners, overlooking elementary children's distinct characteristics and behaviours.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="research-problem">
+        <h2>Research Problem</h2>
+        <div class="paragraph-card">
+        <p>The primary research problem addressed in this study is the need to create an adaptive online learning platform that holistically caters to the unique developmental, emotional, and cognitive needs of primary-level students. This issue arises due to traditional digital learning platforms treating young learners as miniature adults, which leads to challenges such as frustration with cumbersome login systems, lack of personalized emotional support, and inadequate attention management. To address this core problem, four sub-research problems have been identified: </p>
+        <ul style="list-style-type: disc; padding-left: 20px; text-align: justify;">
+            <li style="margin-bottom: 15px;">Implementing secure and user-friendly authentication using facial recognition.  </li>
+            <li style="margin-bottom: 15px;">Developing an emotionally intelligent system that provides personalized emotional support through reinforcement learning and large language models</li>
+            <li style="margin-bottom: 15px;">Creating a knowledge-based recommendation system that offers transparent, explainable AI-driven educational guidance</li>
+            <li style="margin-bottom: 15px;">Designing an attention monitoring system that uses deep learning to provide real-time feedback and interventions. </li>
+        </ul>
+
+        <p>These sub-problems collectively aim to enhance both immediate and long-term educational outcomes for primary students.</p>
+        </div>
+    </div>
+
+    <div class="section" id="proposed-solution">
+        <h2>Proposed Solution</h2>
+        <div class="paragraph-card">
+            <div style="margin-bottom: 15px;">
+                <p>The primary research problem addressed in this study revolves around the pressing need to develop an adaptive learning platform specifically tailored for primary-level students. This platform aims to leverage machine learning and personalized recommendations to enhance key aspects of the educational experience, including authentication, emotional well-being, attention monitoring, and academic performance. The proposed solution adopts a comprehensive approach by addressing four key sub-research problems:</p>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <p>
+                    1. <strong>Facial Authentication</strong>: Replacing traditional login systems with facial authentication to accommodate young students who may struggle with usernames and passwords.
+                </p>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <p>
+                    2. <strong>Emotional Well-being Support</strong>: Identifying and addressing emotional weaknesses among students through personalized advice and interventions, with the goal of enhancing motivation, engagement, and overall well-being.
+                </p>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <p>
+                    3. <strong>Personalized Learning Recommendations</strong>: Offering actionable recommendations aimed at improving educational performance holistically, including personalized learning pathways, adaptive quizzes, and transparent, explainable AI-driven suggestions.
+                </p>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <p>
+                    4. <strong>Attention Monitoring System</strong>: Implementing a system to help students improve their focus and concentration during learning activities, thereby optimizing their learning outcomes.
+                </p>
+            </div>
+            <div>
+                <p>
+                    This multifaceted approach aims to create a seamless and effective learning environment that caters to the unique needs of primary-level students, ensuring a high level of engagement, academic success, and emotional well-being.
+                </p>
+            </div>
+        </div>
+        </div>
+
+    <div class="section" id="main-objectives">
+        <h2>Main Objectives</h2>
+        <div class="paragraph-card">
+            <p>This platform aims to enhance primary education through the integration of four key components:</p>
+            <ul style="list-style-type: disc; padding-left: 20px; text-align: justify;">
+                <li style="margin-bottom: 15px;">
+                    <b>Adaptive Learning Tracking System Using Facial Authentication</b><br>
+                    Develop a robust and accurate facial dynamics-based user authentication algorithm.
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <b>Addressing Emotional Weaknesses of Primary Students by Giving Personalized Advice</b><br>
+                    Identify and address emotional challenges through real-time analysis, offering personalized advice to support emotional and cognitive development.
+                </li>
+                <li style="margin-bottom: 15px;">
+                    <b>Attention Behavior Analytics for Online Exam Practice Environment</b><br>
+                    Monitor and enhance students' attention during online learning sessions using real-time feedback mechanisms based on facial analysis and head posture characteristics.
+                </li>
+                <li>
+                    <b>Recommendation System to Improve Educational Performance</b><br>
+                    Develop a recommendation system to personalize learning paths and enhance educational performance within the adaptive online platform, addressing challenges faced by primary students in online learning environments.
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" id="methodology">
+        <h2>Methodology</h2>
+        <div class="paragraph-card">
+        <p>The system architecture outlined in this research project aims to develop an adaptive learning platform tailored for primary-level students. This platform integrates machine learning and personalized recommendations to enhance authentication, emotional well-being, attention monitoring, and academic performance. By leveraging data from facial authentication, emotional assessments, and attention monitoring, the platform provides individualized support based on each student's needs. The platform addresses challenges such as replacing conventional login systems with facial authentication, addressing emotional weaknesses through personalized advice, offering actionable recommendations for improving educational performance, and helping students improve their focus and attention. Rigorous user testing and cross-validation ensure the platform's effectiveness and user-friendliness, aligning with the goal of creating an accurate, engaging, and supportive learning environment for primary-level students.</p>
+        </div>
+        <img src="assert/img/Diagram.png" alt="Methodology Diagram" style="width: 80%; height: auto;">
+    </div>
+
+    <div class="section" id="timeline">
+        <h2>Timeline Milestones</h2>
+        <div class="timeline">
+            <div class="milestone">
+                <h3>TAF - 15 July 2023</h3>
+                <p>Completion : 2%</p>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" style="width: 2%;"></div>
+                </div>
+            </div>
+            <div class="milestone">
+                <h3>Project Proposal - 31 July 2023</h3>
+                <p>Completion : 5%</p>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" style="width: 5%;"></div>
+                </div>
+            </div>
+            <div class="milestone">
+                <h3>Progress Presentation I - 3 November 2023</h3>
+                <p>Completion : 35%</p>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" style="width: 35%;"></div>
+                </div>
+            </div>
+            <div class="milestone">
+                <h3>Status Document I - 3 November 2023</h3>
+                <p>Completion : 35%</p>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" style="width: 35%;"></div>
+                </div>
+            </div>
+            <div class="milestone">
+                <h3>Research Paper - 4 March 2024</h3>
+                <p>Completion : 55%</p>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" style="width: 55%;"></div>
+                </div>
+            </div>
+            <div class="milestone">
+                <h3>Progress Presentation II - 18 March 2024</h3>
+                <p>Completion : 65%</p>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" style="width: 65%;"></div>
+                </div>
+            </div>
+            <div class="milestone">
+                <h3>Status Document II - 18 March 2024</h3>
+                <p>Completion : 65%</p>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" style="width: 65%;"></div>
+                </div>
+            </div>
+            <div class="milestone">
+                <h3>Final Report - 5 April 2024</h3>
+                <p>Completion : 75%</p>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" style="width: 75%;"></div>
+                </div>
+            </div>
+            <div class="milestone">
+                <h3>Final Presentation & Viva - 18 May 2024</h3>
+                <p>Completion : 90%</p>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" style="width: 90%;"></div>
+                </div>
+            </div>
+            <div class="milestone">
+                <h3>Website Assessment - 14 June 2024</h3>
+                <p>Completion : 100%</p>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" style="width: 100%;"></div>
+                </div>
+            </div>
+            <div class="milestone">
+                <h3>Logbook - 28 June 2024</h3>
+                <p>Completion : 100%</p>
+                <div class="progress-bar">
+                    <div class="progress-bar-inner" style="width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="section" id="tools">
+        <h2>Tools and Technologies</h2>
+        <div class="technology">
+            <div>
+                <img src="assert/img/VSCode.png" alt="Visual Studio Code">
+                <p>Visual Studio Code</p>
+            </div>
+            <div>
+                <img src="assert/img/ReactJS.png" alt="React JS">
+                <p>React JS</p>
+            </div>
+            <div>
+                <img src="assert/img/Python.png" alt="Python">
+                <p>Python</p>
+            </div>
+            <div>
+                <img src="assert/img/JupyterNotebook.png" alt="Jupyter Notebook">
+                <p>Jupyter Notebook</p>
+            </div>
+            <div>
+                <img src="assert/img/GoogleColab.png" alt="Google Collaboratory">
+                <p>Google Collaboratory</p>
+            </div>
+            <div>
+                <img src="assert/img/MongoDB.png" alt="MongoDB">
+                <p>MongoDB</p>
+            </div>
+            <div>
+                <img src="assert/img/Flask.png" alt="Flask">
+                <p>Flask</p>
+            </div>
+            <div>
+                <img src="assert/img/Gitlab.png" alt="GitLab">
+                <p>GitLab</p>
+            </div>
+            <div>
+                <img src="assert/img/Github.png" alt="GitHub">
+                <p>GitHub</p>
+            </div>
+            <div>
+                <img src="assert/img/MsTeams.png" alt="Teams">
+                <p>Teams</p>
+            </div>
+            <div>
+                <img src="assert/img/meet.png" alt="Google Meet">
+                <p>Google Meet</p>
+            </div>
+            <div>
+                <img src="assert/img/zoom.png" alt="Zoom">
+                <p>Zoom</p>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="section" id="documents">
+        <div>
+        <h2>Project Documents</h2>
+        </div>
+        <div class="document-card">
+            <h3>Topic Assesment</h3>
+            <a href="project_plans.pdf" download>Download</a>
+        </div>
+        <div class="document-card">
+            <h3>Project Charter</h3>
+            <a href="research_papers.pdf" download>Download</a>
+        </div>
+        <div class="document-card">
+            <h3>Project Proposal</h3>
+            <a href="user_guides.pdf" download>Download</a>
+        </div>
+        <div class="document-card">
+            <h3>Status Document 1</h3>
+            <a href="project_plans.pdf" download>Download</a>
+        </div>
+        <div class="document-card">
+            <h3>Research Papers</h3>
+            <a href="research_papers.pdf" download>Download</a>
+        </div>
+        <div class="document-card">
+            <h3>Status Document 2</h3>
+            <a href="user_guides.pdf" download>Download</a>
+        </div>
+        <div class="document-card">
+            <h3>Final Report</h3>
+            <a href="project_plans.pdf" download>Download</a>
+        </div>
+    </div>
+
+    <section id="about" class="about-section si2">
+        <div class="section-padding">
+            <h1 class="whatIs-title1" id="tech">Our Team</h1>
+            <div class="autoAlignAbout">
+                <div class="about-main">
+                    <div class="about-card">
+                        <div class="about-card-top">
+                            <img src="assert/img/team/panduka.png" alt="team" class="about-team-picture" />
+                        </div>
+                        <div class="about-card-bot">
+                            <div class="team-stat">Group Leader</div>
+
+
+                            <div class="team-content">
+                                <div>
+                                    <span style="font-weight: bold; font-size: 1.2em">Wijesundara W.M.P.S.</span> <br>
+                                    <span style="font-weight: bold; font-size: 1.0em">Undergraduate</span>
+                                    <br />
+                                    Sri Lanka Institute of Information Technology
+                                </div>
+                                <br />
+                                <div>
+                                    <span style="font-weight: bold; font-size: 1.2em">Department</span>
+                                    <br />
+                                    Data Science
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-card-top">
+                            <img src="assert/img/team/inuri.png" alt="team" class="about-team-picture" />
+                        </div>
+                        <div class="about-card-bot">
+                            <div class="team-stat">Group Member</div>
+                            <div class="team-content">
+                                <div>
+                                    <span style="font-weight: bold; font-size: 1.2em">Hapuarachchi H.D.I.C.</span> <br>
+                                    <span style="font-weight: bold; font-size: 1.0em">Undergraduate</span>
+                                    <br />
+                                    Sri Lanka Institute of Information Technology
+                                </div>
+                                <br />
+                                <div>
+                                    <span style="font-weight: bold; font-size: 1.2em">Department</span>
+                                    <br />
+                                    Data Science
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-card-top">
+                            <img src="assert/img/team/yushan.jpg" alt="team" class="about-team-picture" />
+                        </div>
+                        <div class="about-card-bot">
+                            <div class="team-stat">Group Member</div>
+                            <div class="team-content">
+                                <div>
+                                    <span style="font-weight: bold; font-size: 1.2em">Jayasekara J.A.Y.V</span> <br>
+                                    <span style="font-weight: bold; font-size: 1.0em">Undergraduate</span>
+                                    <br />
+                                    Sri Lanka Institute of Information Technology
+                                </div>
+                                <br />
+                                <div>
+                                    <span style="font-weight: bold; font-size: 1.2em">Department</span>
+                                    <br />
+                                    Data Science
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-card-top">
+                            <img src="assert/img/team/dilshi.jpg" alt="team" class="about-team-picture" />
+                        </div>
+                        <div class="about-card-bot">
+                            <div class="team-stat">Group Member</div>
+                            <div class="team-content">
+                                <div>
+                                    <span style="font-weight: bold; font-size: 1.15em">Samarakkody G.K.G.D.A</span> <br>
+                                    <span style="font-weight: bold; font-size: 1.0em">Undergraduate</span>
+                                    <br />
+                                    Sri Lanka Institute of Information Technology
+                                </div>
+                                <br />
+                                <div>
+                                    <span style="font-weight: bold; font-size: 1.2em">Department</span>
+                                    <br />
+                                    Data Science
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="">
+            <div class="autoAlignAbout">
+                <div class="about-main">
+                    <div class="about-card">
+                        <div class="about-card-top">
+                            <img src="assert/img/team/supervisor.jpg" alt="team" class="about-team-picture" />
+                        </div>
+                        <div class="about-card-bot">
+                            <div class="team-stat">Supervisor</div>
+                            <div class="team-content">
+                                <div>Sri Lanka Institute of Information Technology</div>
+                                <br />
+                                <div>
+                                    <span style="font-weight: bold; font-size: 1.2em">Department</span>
+                                    <br />
+                                    Computing
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-card">
+                        <div class="about-card-top">
+                            <img src="assert/img/team/co-supervisor.jpg" alt="team" class="about-team-picture" />
+                        </div>
+                        <div class="about-card-bot">
+                            <div class="team-stat">Co-supervisor</div>
+                            <div class="team-content">
+                                <div>Sri Lanka Institute of Information Technology</div>
+                                <br />
+                                <div>
+                                    <span style="font-weight: bold; font-size: 1.2em">Department</span>
+                                    <br />
+                                    Computing
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>EduFlex</h3>
+                <p>Adaptive Online Learning Platforms for Primary Students</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#topic">Topic</a></li>
+                    <li><a href="#research-problem">Research Problem</a></li>
+                    <li><a href="#proposed-solution">Proposed Solution</a></li>
+                    <li><a href="#methodology">Methodology</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: panduka.s.wijesundara@gmail.com</p>
+                <p>Phone: +94 717635583</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 EduFlex. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.document-card');
+        
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+        
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+        
+                    const angleX = (y - centerY) / 10;
+                    const angleY = (centerX - x) / 10;
+        
+                    card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) translateZ(10px)`;
+                });
+        
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+                });
+            });
+        });
+        </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
